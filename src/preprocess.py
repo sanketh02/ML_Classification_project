@@ -53,18 +53,18 @@ def preprocess(df):
     print(f"After SMOTE — Revenue 0: {(y_resampled==0).sum()}, Revenue 1: {(y_resampled==1).sum()}")
 
     # save scaler to disk for use in prediction
-    with open('./ml/scaler.pkl', 'wb') as f:
+    with open('./src/scaler.pkl', 'wb') as f:
         pickle.dump(scaler, f)  # serialize scaler
 
     # save selector to disk for use in prediction
-    with open('./ml/selector.pkl', 'wb') as f:
+    with open('./src/selector.pkl', 'wb') as f:
         pickle.dump(selector, f)  # serialize selector
 
     # save selected feature names for reference in prediction
-    with open('./ml/selected_features.pkl', 'wb') as f:
+    with open('./src/selected_features.pkl', 'wb') as f:
         pickle.dump(selected_features, f)  # serialize feature names
 
-    print("Scaler, Selector saved to ./ml/")  # log save
+    print("Scaler, Selector saved to ./src/")  # log save
     return X_resampled, y_resampled  # return preprocessed data
 
 if __name__ == "__main__":
