@@ -18,7 +18,7 @@ jobs:
         image: mysql:8.0  # mysql version
         env:
           MYSQL_ROOT_PASSWORD: 12345  # root password
-          MYSQL_DATABASE: shoppers_db  # database name
+          MYSQL_DATABASE: shopper_db  # database name
         ports:
           - 3306:3306  # expose mysql port
         options: >-
@@ -42,15 +42,17 @@ jobs:
 
     steps:
       - name: Checkout code  # clone repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4 # version issue solved
 
       - name: Set up Python  # setup python 3.11
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5 # version issue solved
         with:
           python-version: "3.11"
 
       - name: Install dependencies  # install requirements
-        run: pip install -r requirements.txt
+        run:
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       - name: Setup database and train model  # load data and train model
         env:
