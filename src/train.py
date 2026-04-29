@@ -62,9 +62,10 @@ def train():
     log_run(best_model, best_name, acc, pre, rec, f1, auc)
 
     # save best model to disk
-    os.makedirs('./src', exist_ok=True)  # create ml dir if not exists
+    os.makedirs('./src', exist_ok=True)  # create src dir if not exists
     with open(os.getenv('MODEL_PATH'), 'wb') as f:
         pickle.dump(best_model, f)  # serialize model
+
     print(f"Model saved to {os.getenv('MODEL_PATH')}")  # log save path
 
     return best_model, X_test, y_test, best_name  # return for evaluate use

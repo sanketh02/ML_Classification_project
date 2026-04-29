@@ -33,6 +33,24 @@ def predict(input_data: dict):
 
     # convert input dict to dataframe
     df = pd.DataFrame([input_data])
+    cols = ["Administrative",
+            "Administrative_Duration",
+            "Informational",
+            "Informational_Duration",
+            "ProductRelated",
+            "ProductRelated_Duration",
+            "BounceRates",
+            "ExitRates",
+            "PageValues",
+            "SpecialDay",
+            "Month",
+            "OperatingSystems",
+            "Browser",
+            "Region",
+            "TrafficType",
+            "VisitorType",
+            "Weekend"]
+    df = df[cols]
 
     # scale ALL 17 features first (same as training)
     df_scaled = scaler.transform(df)
@@ -43,6 +61,8 @@ def predict(input_data: dict):
     # make prediction
     prediction = model.predict(df_selected)[0]  # 0 or 1
     probability = model.predict_proba(df_selected)[0][1]  # probability of Revenue=1
+    if np.isnan(probability):
+        probability = 0.0
 
     result = {
         "prediction": int(prediction),
